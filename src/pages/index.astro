@@ -2,7 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 
 import { client } from '../lib/sanity'
+// This query is called GROQ.
 
+// It means:
+
+// Find every document
+// where _type is note
+// and return:
+// - title
+// - slug
 const notes = await client.fetch(`
   *[_type == "note"]{
     title,

@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
 import { client } from '../lib/sanity'
 // This query is called GROQ.
 
@@ -17,14 +16,18 @@ const notes = await client.fetch(`
     slug
   }
 `)
+
+const docs = await client.fetch(`*[]{_type, title}`)
+console.log(docs)
 ---
 
 <Layout>
 
 <h1>My Digital Garden</h1>
-	<ul>
+	<!-- <ul>
 	{notes.map((note) => (
 		<li>{note.title}</li>
 	))}
-	</ul>
+	</ul> -->
+	<pre>{JSON.stringify(notes, null, 2)}</pre>
 </Layout>

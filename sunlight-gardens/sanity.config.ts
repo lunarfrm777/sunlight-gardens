@@ -8,7 +8,7 @@ export default defineConfig({
   title: 'sunlight-gardens',
 
   projectId: 'jubfu9xb',
-  dataset: 'db',
+  dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
 

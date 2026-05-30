@@ -27,5 +27,14 @@ export const noteType = defineType({
       type: 'array',
       of: [{type: 'block'}],
     }),
+
+     defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
   ],
 })

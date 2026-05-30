@@ -1,6 +1,6 @@
 ---
+// index.astro        → list all notes (NO slug)
 import Layout from '../layouts/Layout.astro';
-import { client } from '../lib/sanity'
 // This query is called GROQ.
 
 // It means:
@@ -10,24 +10,26 @@ import { client } from '../lib/sanity'
 // and return:
 // - title
 // - slug
+import { client } from '../lib/sanity'
+
 const notes = await client.fetch(`
   *[_type == "note"]{
     title,
-    slug
+    "slug": slug.current
   }
 `)
-
-const docs = await client.fetch(`*[]{_type, title}`)
-console.log(docs)
 ---
-
 <Layout>
 
 <h1>My Digital Garden</h1>
-	<!-- <ul>
-	{notes.map((note) => (
-		<li>{note.title}</li>
-	))}
-	</ul> -->
-	<pre>{JSON.stringify(notes, null, 2)}</pre>
+
+<ul>
+  {notes.map((note) => (
+    <li>
+      <a href={`/notes/${note.slug}`}>
+        {note.title}
+      </a>
+    </li>
+  ))}
+</ul>
 </Layout>

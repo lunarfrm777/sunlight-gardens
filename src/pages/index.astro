@@ -20,4 +20,11 @@ const notes = await client.fetch(`
 ---
 
 <Layout>
+
+<h1>My Digital Garden</h1>
+	<ul>
+	{notes.map((note) => (
+		<li>{note.title}</li>
+	))}
+	</ul>
 </Layout>

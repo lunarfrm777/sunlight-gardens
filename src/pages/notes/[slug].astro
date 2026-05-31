@@ -7,11 +7,25 @@ import { toHTML } from '@portabletext/to-html'
 
 const { slug } = Astro.params
 
+// without this getStaticPaths function,, slug will always be ??? when running at build time!! astro gets all the paths to the file
+// and then inserts them below in the return using the parameters key and assigning it to note.slug!!!! which each note has when
+// created :D
+export async function getStaticPaths() {
+  const notes = await client.fetch(`
+    *[_type == "note"]{
+      "slug": slug.current
+    }
+  `)
+    return notes.map((note) => ({
+    params: { slug: note.slug },
+  }))
+}
+
 const note = await client.fetch(`
   *[_type == "note" && slug.current == $slug][0]{
     title,
     content,
-    coverImage,
+    image,
     tags
   }
 `, { slug })

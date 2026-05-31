@@ -1,3 +1,4 @@
+export const prerender = false
 import { client } from '../../lib/sanity'
 
 // In Astro:
@@ -12,16 +13,28 @@ import { client } from '../../lib/sanity'
 // So it ONLY works with HTML forms.
 export async function POST(context) {
   const { request } = context
+  
+  console.log(request.headers.get('content-type'))
     const form = await request.formData()
 
     const title = form.get('title')
     const content = form.get('content')
-    const image = form.get('image')
+    const image = form.get('image') as File
     let imageRef = null
-    if (image && image.size > 0) {
-    const uploaded = await client.assets.upload('image', image)
-    imageRef = uploaded._id
+   if (image && image.size > 0) {
+  const bytes = await image.arrayBuffer()
+  const buffer = Buffer.from(bytes)
+
+  const uploaded = await client.assets.upload(
+    'image',
+    buffer,
+    {
+      filename: image.name,
     }
+  )
+
+  imageRef = uploaded._id
+}
     await client.create({
     _type: 'note',
     title,
@@ -54,3 +67,10 @@ export async function POST(context) {
         headers: { Location: '/' },
     })
 }
+
+// export async function POST({ request }) {
+//   console.log("POST HIT")
+//   console.log("content-type:", request.headers.get("content-type"))
+
+//   return new Response("ok")
+// }

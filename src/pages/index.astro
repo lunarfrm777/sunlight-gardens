@@ -1,5 +1,6 @@
 ---
 import { client } from '../lib/sanity'
+import Create from './create.astro'
 
 const notes = await client.fetch(`
   *[_type == "note"] | order(_createdAt desc){
@@ -21,3 +22,5 @@ const notes = await client.fetch(`
     </a>
   ))}
 </div>
+
+<Create></Create>

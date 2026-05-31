@@ -22,6 +22,24 @@ export async function POST(context) {
     const image = form.get('image') as File
     let imageRef = null
    if (image && image.size > 0) {
+    // this converts image as file to::
+// Browser forms give you a Web File API object
+// Sanity's Node upload API wants a Node Buffer/stream
+// Astro is sitting in the middle, so you have to bridge the two
+
+// Once this works, your flow becomes:
+
+// Browser file
+//      ↓
+// File object
+//      ↓
+// ArrayBuffer
+//      ↓
+// Node Buffer
+//      ↓
+// Sanity Asset
+//      ↓
+// Image reference stored in note
   const bytes = await image.arrayBuffer()
   const buffer = Buffer.from(bytes)
 

@@ -32,10 +32,6 @@ const note = await client.fetch(`
 ---
 
 <main class="note">
-  {note.coverImage && (
-    <img class="cover" src={urlFor(note.coverImage).url()} />
-  )}
-
   <h1>{note.title}</h1>
 
   {note.tags && (
@@ -43,6 +39,8 @@ const note = await client.fetch(`
       {note.tags.map(tag => <span>#{tag}</span>)}
     </div>
   )}
-
-  <article set:html={toHTML(note.content)} />
+    <article set:html={toHTML(note.content)} />
+  {note.image && (
+    <img class="cover" src={urlFor(note.image).url()} />
+  )}
 </main>

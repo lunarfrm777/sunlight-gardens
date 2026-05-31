@@ -1,36 +1,23 @@
 ---
-// index.astro        → list all notes (NO slug)
-// list page (no params)
-import Layout from '../layouts/Layout.astro';
-// This query is called GROQ.
-
-// It means:
-
-// Find every document
-// where _type is note
-// and return:
-// - title
-// - slug
 import { client } from '../lib/sanity'
 
 const notes = await client.fetch(`
-  *[_type == "note"]{
+  *[_type == "note"] | order(_createdAt desc){
     title,
-    "slug": slug.current
+    slug,
+    image,
+    excerpt
   }
 `)
 ---
-<Layout>
 
 <h1>My Digital Garden</h1>
 
-<ul>
-  {notes.map((note) => (
-    <li>
-      <a href={`/notes/${note.slug}`}>
-        {note.title}
-      </a>
-    </li>
+<div class="grid">
+  {notes.map(note => (
+    <a class="card" href={`/notes/${note.slug.current}`}>
+      <h2>{note.title}</h2>
+      <p>{note.excerpt}</p>
+    </a>
   ))}
-</ul>
-</Layout>
+</div>

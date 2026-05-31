@@ -1,0 +1,13 @@
+---
+import { client } from '../lib/sanity'
+---
+
+<h1>Create Note</h1>
+
+<form method="POST" action="/api/create-note">
+  <input name="title" placeholder="Title" />
+
+  <textarea name="content" placeholder="Content"></textarea>
+
+  <button type="submit">Create</button>
+</form>

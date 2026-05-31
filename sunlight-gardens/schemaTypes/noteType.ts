@@ -6,7 +6,14 @@ import { defineField, defineType } from 'sanity'
 
 // into:
 
-// structured “garden entries”
+// // structured “garden entries”
+// Now every note has:
+
+// title
+// preview (excerpt)
+// visual identity (image)
+// categories (tags)
+// body content
 export const noteType = defineType({
   name: 'note',
   title: 'Note',

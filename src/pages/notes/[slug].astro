@@ -5,39 +5,30 @@
 import { client, urlFor } from '../../lib/sanity'
 import { toHTML } from '@portabletext/to-html'
 
-// 1. Get all slugs so Astro can build pages
-export async function getStaticPaths() {
-  const notes = await client.fetch(`
-    *[_type == "note"]{
-      "slug": slug.current
-    }
-  `)
-
-  return notes.map((note) => ({
-    params: { slug: note.slug },
-  }))
-}
-
-// 2. Get the slug from the URL
 const { slug } = Astro.params
 
-// 3. Fetch the full note
 const note = await client.fetch(`
   *[_type == "note" && slug.current == $slug][0]{
     title,
     content,
-    image
+    coverImage,
+    tags
   }
 `, { slug })
 ---
 
-<h1>{note.title}</h1>
+<main class="note">
+  {note.coverImage && (
+    <img class="cover" src={urlFor(note.coverImage).url()} />
+  )}
 
-<div set:html={toHTML(note.content)} />
+  <h1>{note.title}</h1>
 
-{note.image && (
-  <img
-    src={urlFor(note.image).url()}
-    alt={note.title}
-  />
-)}
+  {note.tags && (
+    <div class="tags">
+      {note.tags.map(tag => <span>#{tag}</span>)}
+    </div>
+  )}
+
+  <article set:html={toHTML(note.content)} />
+</main>

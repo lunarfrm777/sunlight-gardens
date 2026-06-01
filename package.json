@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/netlify": "^7.0.11",
     "@portabletext/to-html": "^5.0.2",
     "@sanity/client": "^7.22.1",
     "@sanity/image-url": "^2.1.1",

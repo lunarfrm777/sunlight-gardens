@@ -1,15 +1,22 @@
 ---
 import { client } from '../lib/sanity'
 import Create from './create.astro'
+import GardenGraph from '../components/GardenGraph.astro'
 
+// updated slug because d3 wants the slug string rather than the whole slug which is an object 
 const notes = await client.fetch(`
   *[_type == "note"] | order(_createdAt desc){
     title,
-    slug,
+    "slug": slug.current,
     image,
     excerpt
   }
 `)
+---
+
+<h1>Sunlight Garden</h1>
+
+<GardenGraph notes={notes} />
 ---
 
 <h1>My Digital Garden</h1>

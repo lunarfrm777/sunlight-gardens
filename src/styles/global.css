@@ -1,0 +1,17 @@
+#garden {
+  width: 100%;
+  overflow: hidden;
+}
+
+#garden svg {
+  width: 100%;
+  height: 70vh;
+}
+
+#garden circle {
+  transition: transform 0.2s;
+}
+
+#garden circle:hover {
+  transform: scale(1.15);
+}

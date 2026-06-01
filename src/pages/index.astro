@@ -18,8 +18,6 @@ const notes = await client.fetch(`
 
 <GardenGraph notes={notes} />
 
-<h1>My Digital Garden</h1>
-
 <div class="grid">
   {notes.map(note => (
     <a class="card" href={`/notes/${note.slug}`}>

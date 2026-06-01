@@ -1,3 +1,10 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
 #garden {
   width: 100%;
   height: 70vh;

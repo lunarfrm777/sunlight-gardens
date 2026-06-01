@@ -13,17 +13,16 @@ const notes = await client.fetch(`
   }
 `)
 ---
-
+<!-- Header -> GardenGraph 🌱 -> Card Grid 📚 -->
 <h1>Sunlight Garden</h1>
 
 <GardenGraph notes={notes} />
----
 
 <h1>My Digital Garden</h1>
 
 <div class="grid">
   {notes.map(note => (
-    <a class="card" href={`/notes/${note.slug.current}`}>
+    <a class="card" href={`/notes/${note.slug}`}>
       <h2>{note.title}</h2>
       <p>{note.excerpt}</p>
     </a>

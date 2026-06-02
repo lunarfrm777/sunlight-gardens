@@ -15,19 +15,17 @@ const note = await client.fetch(`
 `, { slug })
 ---
 
-<form method="POST" action="/api/update-note">
+<form method="POST" action="/api/update-note" enctype="multipart/form-data">
+
   <input type="hidden" name="id" value={note._id} />
 
-  <input
-    name="title"
-    value={note.title}
-  />
+  <input name="title" value={note.title} />
 
   <textarea name="content">
     {note.content?.[0]?.children?.[0]?.text}
   </textarea>
 
-  <button type="submit">
-    Save
-  </button>
+  <input type="file" name="image" />
+
+  <button>Save</button>
 </form>

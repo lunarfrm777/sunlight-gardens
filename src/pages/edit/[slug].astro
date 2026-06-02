@@ -24,7 +24,7 @@ const note = await client.fetch(`
   />
 
   <textarea name="content">
-    {note.content}
+    {note.content?.[0]?.children?.[0]?.text}
   </textarea>
 
   <button type="submit">

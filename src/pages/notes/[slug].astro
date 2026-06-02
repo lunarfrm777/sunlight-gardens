@@ -27,6 +27,7 @@ const note = await client.fetch(`
   *[_type == "note" && slug.current == $slug][0]{
     _id,
     title,
+    "slug": slug.current,
     content,
     image,
     tags
@@ -46,7 +47,7 @@ const note = await client.fetch(`
   {note.image && (
     <img class="cover" src={urlFor(note.image).url()} />
   )}
-  <a href={`/edit/${note.slug.current}`}>
+  <a href={`/edit/${note.slug}`}>
   Edit
 </a>
 

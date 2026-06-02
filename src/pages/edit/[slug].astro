@@ -1,3 +1,20 @@
+---
+import { client } from '../../lib/sanity'
+
+const { slug } = Astro.params
+
+const note = await client.fetch(`
+  *[_type == "note" && slug.current == $slug][0]{
+    _id,
+    title,
+    "slug": slug.current,
+    content,
+    image,
+    tags
+  }
+`, { slug })
+---
+
 <form method="POST" action="/api/update-note">
   <input type="hidden" name="id" value={note._id} />
 

@@ -16,7 +16,12 @@ export async function POST(context) {
   
   console.log(request.headers.get('content-type'))
     const form = await request.formData()
+    // guard rail added 
+const adminKey = form.get("adminKey")
 
+if (adminKey !== process.env.ADMIN_KEY) {
+  return new Response("Unauthorized", { status: 401 })
+}
     const title = form.get('title')
     const content = form.get('content')
     const image = form.get('image') as File

@@ -52,11 +52,8 @@ const note = await client.fetch(`
 </a>
 
 <form method="POST" action="/api/delete-note">
-  <input
-    type="hidden"
-    name="id"
-    value={note._id}
-  />
+  <!-- admin key -->
+  <input type="hidden" name="adminKey" value="blue-satellite-9273" />
 
   <button>
     Delete

@@ -1,0 +1,16 @@
+<form method="POST" action="/api/update-note">
+  <input type="hidden" name="id" value={note._id} />
+
+  <input
+    name="title"
+    value={note.title}
+  />
+
+  <textarea name="content">
+    {content}
+  </textarea>
+
+  <button type="submit">
+    Save
+  </button>
+</form>

@@ -46,4 +46,16 @@ const note = await client.fetch(`
   <a href={`/edit/${note.slug.current}`}>
   Edit
 </a>
+
+<form method="POST" action="/api/delete-note">
+  <input
+    type="hidden"
+    name="id"
+    value={note._id}
+  />
+
+  <button>
+    Delete
+  </button>
+</form>
 </main>

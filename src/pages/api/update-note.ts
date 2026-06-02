@@ -3,11 +3,11 @@ import { client } from '../../lib/sanity'
 export async function POST({ request }) {
   const form = await request.formData()
 // guard rail
-  const adminKey = form.get("adminKey")
+  // const adminKey = form.get("adminKey")
 
-  if (adminKey !== process.env.ADMIN_KEY) {
-    return new Response("Unauthorized", { status: 401 })
-  }
+  // if (adminKey !== process.env.ADMIN_KEY) {
+  //   return new Response("Unauthorized", { status: 401 })
+  // }
 
   const id = form.get('id')
   const title = form.get('title')

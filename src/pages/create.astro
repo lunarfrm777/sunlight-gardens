@@ -5,6 +5,7 @@ import { client } from '../lib/sanity'
 <h1>Create Note</h1>
 
 <form method="POST" action="/api/create-note" enctype="multipart/form-data">
+    <input type="hidden" name="adminKey" value="blue-satellite-9273" />
   <input name="title" />
   <textarea name="content"></textarea>
   <input type="file" name="image" />

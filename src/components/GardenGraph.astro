@@ -6,31 +6,33 @@ const { notes } = Astro.props;
 <script type="module" define:vars={{ notes }}>
   import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-  const width = 900;
-  const height = 600;
+window.addEventListener("load", () => {
+  const container = document.getElementById("garden");
+
+  const width = container.clientWidth;
+  const height = container.clientHeight;
 
   const nodes = notes.map(n => ({
     id: n.slug,
     title: n.title,
   }));
 
-  const svg = d3
-    .select("#garden")
-    .append("svg")
+  const svg = d3.select(container)
+    .selectAll("svg")
+    .data([null])
+    .join("svg")
     .attr("width", width)
     .attr("height", height);
 
-const simulation = d3
-  .forceSimulation(nodes)
-  .force("charge", d3.forceManyBody().strength(-150))
-  .force("center", d3.forceCenter(width / 2, height / 2))
-  .force("collide", d3.forceCollide(35));
+  const simulation = d3.forceSimulation(nodes)
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    .force("charge", d3.forceManyBody().strength(-220))
+    .force("collide", d3.forceCollide(45));
 
   const circles = svg
     .selectAll("circle")
     .data(nodes)
-    .enter()
-    .append("circle")
+    .join("circle")
     .attr("r", 25)
     .style("fill", "lightgreen")
     .style("cursor", "pointer")
@@ -41,8 +43,7 @@ const simulation = d3
   const labels = svg
     .selectAll("text")
     .data(nodes)
-    .enter()
-    .append("text")
+    .join("text")
     .text(d => d.title)
     .style("font-size", "12px");
 
@@ -55,4 +56,5 @@ const simulation = d3
       .attr("x", d => d.x + 30)
       .attr("y", d => d.y);
   });
+});
 </script>

@@ -43,4 +43,7 @@ const note = await client.fetch(`
   {note.image && (
     <img class="cover" src={urlFor(note.image).url()} />
   )}
+  <a href={`/edit/${note.slug.current}`}>
+  Edit
+</a>
 </main>

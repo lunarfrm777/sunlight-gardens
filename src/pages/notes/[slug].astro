@@ -21,6 +21,8 @@ export async function getStaticPaths() {
   }))
 }
 
+// You can update/delete by first looking up the slug, but since you've already fetched the note, it's 
+// easier to grab _id at the same time and pass it to your API route
 const note = await client.fetch(`
   *[_type == "note" && slug.current == $slug][0]{
     _id,

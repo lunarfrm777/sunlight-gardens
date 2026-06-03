@@ -35,3 +35,14 @@ body {
   fill: #4ade80;
   stroke: rgba(0,0,0,0.4);
 }
+
+h1 {
+  color: purple;
+  margin-left: 10px;
+  font-size: 2rem;
+}
+
+h2 {
+  color: black;
+  font-weight: bold;
+}

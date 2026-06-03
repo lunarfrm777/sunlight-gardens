@@ -10,22 +10,20 @@ const note = await client.fetch(`
     "slug": slug.current,
     content,
     image,
-    tags
+    createdAt,
+    updatedAt
   }
 `, { slug })
+// export const prerender = true
 ---
 
+
 <form method="POST" action="/api/update-note" enctype="multipart/form-data">
-<!-- admin key -->
-  <!-- <input type="hidden" name="adminKey" value="blue-satellite-9273" /> -->
   <input type="hidden" name="id" value={note._id} />
   <input name="title" value={note.title} />
-
-  <textarea name="content">
-    {note.content?.[0]?.children?.[0]?.text}
-  </textarea>
-
-  <input type="file" name="image" />
-
+  <textarea name="content">{note.content?.map((block: any) =>
+  block.children?.map((c: any) => c.text).join('')
+).join('\n')}</textarea>
+  <input type="file" name="coverImage" />
   <button>Save</button>
 </form>

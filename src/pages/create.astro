@@ -2,12 +2,40 @@
 import { client } from '../lib/sanity'
 ---
 
-<h1>Create Note</h1>
 
-<form method="POST" action="/api/create-note" enctype="multipart/form-data">
-    <input type="hidden" name="adminKey" value="blue-satellite-9273" />
-  <input name="title" />
-  <textarea name="content"></textarea>
-  <input type="file" name="image" />
-  <button type="submit">Create</button>
-</form>
+<div class="card lg:card-side bg-yellow-200 shadow-xl max-w-2xl mx-auto mt-6">
+  <div class="card-body">
+    
+  <h1>Create Note</h1>
+    <p class="text-sm opacity-70 text-black">Add a new entry to your digital garden</p>
+
+    <form method="POST" action="/api/create-note" enctype="multipart/form-data" class="space-y-4 mt-4">
+
+      <input
+        name="title"
+        placeholder="Title"
+        class="input input-bordered w-full"
+      />
+
+      <textarea
+        name="content"
+        placeholder="Write your note..."
+        class="textarea textarea-bordered w-full"
+      ></textarea>
+
+      <input
+        type="file"
+        name="image"
+        class="file-input file-input-bordered w-full"
+      />
+
+      <div class="card-actions justify-end mt-4">
+        <button type="submit" class="btn btn-primary shadow-md hover:shadow-xl brightness-110 bg-amber-300 text-black">
+          Create
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>

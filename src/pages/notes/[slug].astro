@@ -29,7 +29,7 @@ const note = await client.fetch(`
     title,
     "slug": slug.current,
     content,
-    image,
+    coverImage,
     tags
   }
 `, { slug })
@@ -44,8 +44,8 @@ const note = await client.fetch(`
     </div>
   )}
     <article set:html={toHTML(note.content)} />
-  {note.image && (
-    <img class="cover" src={urlFor(note.image).url()} />
+  {note.coverImage && (
+    <img class="cover" src={urlFor(note.coverImage).url()} />
   )}
   <a href={`/edit/${note.slug}`}>
   Edit

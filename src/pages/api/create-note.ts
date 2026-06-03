@@ -90,10 +90,3 @@ export async function POST(context) {
         headers: { Location: '/' },
     })
 }
-
-// export async function POST({ request }) {
-//   console.log("POST HIT")
-//   console.log("content-type:", request.headers.get("content-type"))
-
-//   return new Response("ok")
-// }

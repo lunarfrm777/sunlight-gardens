@@ -1,47 +1,63 @@
+
 import { client } from '../../lib/sanity'
 
 export async function POST({ request }) {
   const form = await request.formData()
-// guard rail
-  // const adminKey = form.get("adminKey")
 
-  // if (adminKey !== process.env.ADMIN_KEY) {
-  //   return new Response("Unauthorized", { status: 401 })
-  // }
+  const id = form.get("id") as string
+  const title = form.get("title") as string
+  const rawContent = form.get("content") as string
+  const rawImage = form.get("coverImage") as File | null
 
-  const id = form.get('id')
-  const title = form.get('title')
-  const content = form.get('content')
-  const image = form.get('image')
+  const content = rawContent.split('\n').filter(Boolean).map(line => ({
+  _type: 'block',
+  _key: Math.random().toString(36).slice(2),
+  children: [{ _type: 'span', _key: Math.random().toString(36).slice(2), text: line }],
+  markDefs: [],
+  style: 'normal',
+}))
 
-  let imageRef = null
-
-  if (image && image.size > 0) {
-    const uploaded = await client.assets.upload('image', image)
+ let imageRef: string | null = null
+try {
+  if (rawImage && (rawImage as File).size > 0) {
+    const arrayBuffer = await (rawImage as File).arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
+    const uploaded = await client.assets.upload("image", buffer, {
+      filename: (rawImage as File).name,
+      contentType: (rawImage as File).type,
+    })
     imageRef = uploaded._id
   }
+} catch (err) {
+  console.error("IMAGE UPLOAD FAILED:", err)
+}
 
-  await client.patch(id).set({
-    title,
-    content: [
-      {
-        _type: "block",
-        children: [{ _type: "span", text: content }]
-      }
-    ],
-    ...(imageRef && {
-      image: {
-        _type: "image",
-        asset: {
-          _type: "reference",
-          _ref: imageRef
+console.log("PATCHING ID:", id)
+console.log("IMAGE REF:", imageRef)
+
+const result = await client
+  .patch(id)
+  .set({
+    title: String(title),
+    content,
+    ...(imageRef
+      ? {
+          coverImage: {
+            _type: "image",
+            asset: {
+              _type: "reference",
+              _ref: imageRef,
+            },
+          },
         }
-      }
-    })
-  }).commit()
-
-  return new Response(null, {
-    status: 303,
-    headers: { Location: '/' }
+      : {}),
   })
+  .commit()
+
+console.log("PATCH RESULT:", result)
+
+return new Response(null, {
+  status: 303,
+  headers: { Location: '/' },
+})
 }

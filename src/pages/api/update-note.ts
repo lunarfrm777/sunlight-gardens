@@ -42,6 +42,6 @@ export async function POST({ request }) {
 
   return new Response(null, {
     status: 303,
-    headers: { Location: '/notes' }
+    headers: { Location: '/' }
   })
 }

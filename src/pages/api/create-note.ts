@@ -24,9 +24,9 @@ export async function POST(context) {
 // }
     const title = form.get('title')
     const content = form.get('content')
-    const image = form.get('image') as File
+    const coverImage = form.get('coverImage') as File
     let imageRef = null
-   if (image && image.size > 0) {
+   if (coverImage && coverImage.size > 0) {
     // this converts image as file to::
 // Browser forms give you a Web File API object
 // Sanity's Node upload API wants a Node Buffer/stream
@@ -45,14 +45,14 @@ export async function POST(context) {
 // Sanity Asset
 //      ↓
 // Image reference stored in note
-  const bytes = await image.arrayBuffer()
+  const bytes = await coverImage.arrayBuffer()
   const buffer = Buffer.from(bytes)
 
   const uploaded = await client.assets.upload(
     'image',
     buffer,
     {
-      filename: image.name,
+      filename: coverImage.name,
     }
   )
 
@@ -75,7 +75,7 @@ export async function POST(context) {
         ],
         },
     ],
-    image: imageRef
+    coverImage: imageRef
         ? {
             _type: 'image',
             asset: {

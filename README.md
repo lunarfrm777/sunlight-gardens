@@ -1,46 +1,25 @@
-# Astro Starter Kit: Basics
+# ♡ Sunlight Gardens ♡
+<img width="1897" height="963" alt="desktop-garden" src="https://github.com/user-attachments/assets/ac77d8e8-0825-46b0-8299-44564962ce0a" />
+<img width="1290" height="2796" alt="mobile-garden" src="https://github.com/user-attachments/assets/468cff3d-4955-40bd-9e60-81cce2873da3" />
 
-```sh
-npm create astro@latest -- --template basics
-```
+# ♡ Technology Used ♡
+- Typescript
+- Astro
+- JavaScript
+- CSS / Tailwind (Daisy UI)
+- D3.js
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+# ♡ What I Built ♡
+- A Full-stack digital garden app built with Astro, TypeScript, and Sanity CMS - users can create, edit, and delete notes with image support, all persisted live through the Sanity API.
 
-## 🚀 Project Structure
+# ♡ What I Learned ♡
+- Integrated Sanity's image pipeline for rich media notes and deployed on Netlify with continuous deployment via GitHub Actions
+- Built custom SSR API routes for full CRUD operations, handling multipart form data and converting browser File objects to Node.js Buffers for server-side image uploads to Sanity
+- Built an interactive D3.js node graph that visualizes relationships between notes, with nodes linking dynamically based on shared content
+- Implemented dynamic slug rendering to generate clean, SEO-friendly URLs for each note at build and request time
+- Strengthened TypeScript type safety across the codebase, resolving type errors and adding strict interfaces for API responses, Sanity schemas, and component props
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+# ♡ Next Steps ♡
+- Authentication for new and exisiting users
+- A separate page with all notes
+- A way to add tags for notes and separate them into different categories

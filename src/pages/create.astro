@@ -10,7 +10,7 @@ import { client } from '../lib/sanity'
     <p class="text-sm opacity-70 text-black">Add a new entry to your digital garden</p>
 
     <form method="POST" action="/api/create-note" enctype="multipart/form-data" class="space-y-4 mt-4">
-
+      <input type="hidden" name="adminKey" value={import.meta.env.ADMIN_KEY} />
       <input
         name="title"
         placeholder="Title"

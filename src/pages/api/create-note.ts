@@ -18,8 +18,7 @@ export async function POST(context) {
     const form = await request.formData()
     // guard rail added 
 const adminKey = form.get("adminKey")
-
-if (adminKey !== process.env.ADMIN_KEY) {
+if (adminKey !== (import.meta as any).env.ADMIN_KEY) {
   return new Response("Unauthorized", { status: 401 })
 }
     const title = form.get('title')

@@ -4,6 +4,7 @@
 import { client } from '../../lib/sanity'
 
 export async function POST({ request }) {
+    console.log("TOKEN:", (import.meta as any).env.SANITY_API_TOKEN)
   const form = await request.formData()
   const id = form.get('id')
 

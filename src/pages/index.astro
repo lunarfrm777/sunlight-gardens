@@ -1,7 +1,9 @@
 ---
+export const prerender = false
 import { client } from '../lib/sanity'
 import '../styles/global.css'
 import GardenGraph from '../components/GardenGraph.astro'
+import Create from "../components/Create.astro"
 
 const notes = await client.fetch(`
   *[_type == "note"] | order(_createdAt desc){
@@ -25,4 +27,4 @@ const notes = await client.fetch(`
   ))}
 </div>
 
-<a href="/create">Create Note</a>
+<Create />

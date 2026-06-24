@@ -1,12 +1,3 @@
----
-import { client } from '../lib/sanity'
-export const prerender = false
-const auth = Astro.cookies.get("auth")
-if (auth?.value !== (import.meta as any).env.ADMIN_PASSWORD) {
-  return Astro.redirect("/login")
-}
----
-
 <div class="card lg:card-side bg-yellow-200 shadow-xl max-w-2xl mx-auto mt-6">
   <div class="card-body">
     

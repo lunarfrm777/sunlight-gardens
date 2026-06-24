@@ -17,6 +17,6 @@ export async function POST({ request, cookies }) {
 
   return new Response(null, {
     status: 303,
-    headers: { Location: "/create" },
+    headers: { Location: "/login" },
   })
 }

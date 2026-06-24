@@ -12,9 +12,15 @@ import { client } from '../../lib/sanity'
 
 // So it ONLY works with HTML forms.
 export async function POST(context) {
-  const { request } = context
+    const { request, cookies } = context
   
-  console.log(request.headers.get('content-type'))
+   const auth = cookies.get("auth")
+  if (auth?.value !== (import.meta as any).env.ADMIN_PASSWORD) {
+    return new Response(null, {
+      status: 303,
+      headers: { Location: "/login" },
+    })
+  }
     const form = await request.formData()
 
     const title = form.get('title')

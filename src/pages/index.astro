@@ -1,20 +1,18 @@
 ---
 import { client } from '../lib/sanity'
 import '../styles/global.css'
-import Create from './create.astro'
 import GardenGraph from '../components/GardenGraph.astro'
 
-// updated slug because d3 wants the slug string rather than the whole slug which is an object 
 const notes = await client.fetch(`
   *[_type == "note"] | order(_createdAt desc){
     title,
     "slug": slug.current,
-    image,
+    coverImage,
     excerpt
   }
 `)
 ---
-<!-- Header -> GardenGraph 🌱 -> Card Grid 📚 -->
+
 <h1>Sunlight Garden</h1>
 <GardenGraph notes={notes} />
 
@@ -27,4 +25,4 @@ const notes = await client.fetch(`
   ))}
 </div>
 
-<Create></Create>
+<a href="/create">Create Note</a>
